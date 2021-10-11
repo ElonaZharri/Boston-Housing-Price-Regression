@@ -7,7 +7,7 @@ with open(f'model/bostonhousing.joblib', 'rb') as f:
     model = load(f)
 
 
-app = flask.Flask(__name__, template_folder='templates')
+app = flask.Flask(__name__, template_folder='templates', static_folder='static')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -29,7 +29,7 @@ def main():
         predictions = model.predict(input_variables)[0]
         print(predictions)
 
-        return flask.render_template('index.html', original_input={'RM': rm, 'PTRATIO': ptratio, 'LSTAT': lstat},
+        return flask.render_template('index.html', original_input={'Room Number': rm, 'Pupil-Teacher Ration': ptratio, 'Lower status of the population': lstat},
                                      result=predictions)
 
 
